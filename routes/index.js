@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var shortid = require('shortid');
 var Product = mongoose.model('Product');
 var pMethod = mongoose.model('pMethod');
 var User = mongoose.model('User');
 var Customer = mongoose.model('Customer');
 var Order = mongoose.model('Order');
+
 
 router.get('/api/products', function(req,res){
 	Product.find({}, function(err, products){
@@ -96,23 +98,24 @@ router.get('/api/customers', function(req,res){
 	});
 });
 
-router.post('/api/customers', function(req,res){
+router.post('/api/customers', function(req,res,next){
 	console.log(req.body);
 	newCustomer=new Customer(req.body);
+	newCustomer.customerID=shortid.generate();
 	newCustomer.save(function(err, customer){
 		if(err){next(err);}
 		res.json(customer);
 	});
 });
 
-router.post('/api/customers/update', function(req,res){
-	Customer.findByIdAndUpdate(req.body._id, { $set:req.body }, function (err, pMethod){
+router.post('/api/customers/update', function(req,res,next){
+	Customer.findByIdAndUpdate(req.body._id, { $set:req.body }, function (err, customer){
 		if(err){next(err);}
-		res.json(pMethod);
+		res.json(customer);
 	});
 });
 
-router.post('/api/customers/delete', function(req,res){
+router.post('/api/customers/delete', function(req,res,next){
 	Customer.findOneAndRemove({'_id':req.body._id},function(err, customer){
 		if(err){next(err);}
 		res.json(customer);
@@ -125,16 +128,27 @@ router.get('/api/orders', function(req,res){
 	});
 });
 
-router.post('/api/orders', function(req,res){
-	
+router.post('/api/orders', function(req,res,next){
+	newOrder=new Order(req.body);
+	newOrder.orderID=shortid.generate();
+	newOrder.save(function(err, order){
+		if(err){next(err);}
+		res.json(order);
+	});
 });
 
 router.post('/api/orders/update',function(req,res){
-	
+		Order.findByIdAndUpdate(req.body._id, { $set:req.body }, function (err, order){
+		if(err){next(err);}
+		res.json(order);
+	});
 });
 
 router.post('/api/orders/delete', function(req,res){
-	
+	Order.findOneAndRemove({'_id':req.body._id},function(err, order){
+		if(err){next(err);}
+		res.json(order);
+	});
 });
 
 router.get('*', function(req, res, next) {

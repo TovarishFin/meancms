@@ -1,0 +1,346 @@
+
+		<!-- ANGULAR DYNAMIC CONTENT -->
+			<div class="panel panel-default">
+				<div class="panel-heading">Hide Non Billing</div>
+			<table class="table table-bordered">
+			<tr>
+				<td><input type="checkbox" ng-model="cFnameShow">First Name</td>
+				<td><input type="checkbox" ng-model="cLnameShow">Last Name</td>
+				<td><input type="checkbox" ng-model="StoAddrShow">Ship to Address</td>
+				<td><input type="checkbox" ng-model="StoCityShow">Ship to City</td>
+				<td><input type="checkbox" ng-model="StoStateShow">Ship to State</td>
+				<td><input type="checkbox" ng-model="StoZipShow">Ship to Zip</td>
+				<td><input type="checkbox" ng-model="StoCountryShow">Ship to Country</td>
+				<td><input type="checkbox" ng-model="cPhoneShow">Phone Number</td>
+			</tr>
+			</table>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">Show Billing</div>
+			<table class="table table-bordered">
+			<tr>
+				<td><input type="checkbox" ng-model="ccNumberShow">CC Number</td>
+				<td><input type="checkbox" ng-model="ccExpDateShow">CC Exp. Date</td>
+				<td><input type="checkbox" ng-model="ccCodeShow">CC Code</td>
+				<td><input type="checkbox" ng-model="BtoAddrShow">Bill to Address</td>
+				<td><input type="checkbox" ng-model="BtoCityShow">Bill to City</td>
+				<td><input type="checkbox" ng-model="BtoStateShow">Bill to State</td>
+				<td><input type="checkbox" ng-model="BtoZipShow">Bill to Zip</td>
+				<td><input type="checkbox" ng-model="BtoCountryShow">Bill to Country</td>
+			</tr>
+			</table>
+			<div class="panel panel-default">
+				<div class="panel-heading">Hide Item Info & Logistics</div>
+			<table class="table table-bordered">
+			<tr>
+				<td><input type="checkbox" ng-model="itemNameShow">Item Name</td>
+				<td><input type="checkbox" ng-model="pMethodShow">Payment Info</td>
+				<td><input type="checkbox" ng-model="itemPriceShow">Item Price</td>
+				<td><input type="checkbox" ng-model="orderStatusShow">Order Status</td>
+				<td><input type="checkbox" ng-model="tNumShow">Tracking Number</td>
+				<td><input type="checkbox" ng-model="sLabelShow">Shipping Label</td>
+				<td><input type="checkbox" ng-model="postIDShow">Post ID</td>
+				<td><input type="checkbox" ng-model="userShow">Added By User</td>
+				<td><input type="checkbox" ng-model="orderIDShow">Order ID</td>
+				<td><input type="checkbox" ng-model="dateShow">Date Added</td>
+			</tr>
+			</table>
+			</div>
+			<div>
+			<table class="table table-bordered">
+			<tr>
+				<th ng-hide="itemNameShow">
+					<button ng-click="sort('itemName')">Item Name</button>
+				</th>
+				<th ng-hide="pMethodShow">
+					<button ng-click="sort('pMethod')">Payment Method</button>
+				</th>
+				<th ng-hide="itemPriceShow">
+					<button ng-click="sort('itemPrice')">Item Price</button>
+				</th>
+				<th ng-hide="orderStatusShow">
+					<button ng-click="sort('orderStatus')">Order Status</button>
+				</th>
+				<th ng-hide="cFnameShow">
+					<button ng-click="sort('cFname')">First Name</button>
+				</th>
+				<th ng-hide="cLnameShow">
+					<button ng-click="sort('cLname')">Last Name</button>
+				</th>
+				<th ng-show="ccNumberShow">
+					<button ng-click="sort('ccNumber')">CC Number</button>
+				</th>
+				<th ng-show="ccExpDateShow">
+					<button ng-click="sort('ccExpDate')">CC Expiry</button>
+				</th>
+				<th ng-show="ccCodeShow">
+					<button ng-click="sort('ccCode')">CC Code</button>
+				</th>
+				<th ng-show="BtoAddrShow">
+					<button ng-click="sort('BtoAddr')">Bill to Address</button>
+				</th>
+				<th ng-show="BtoCityShow">
+					<button ng-click="sort('BtoCity')">Bill to City</button>
+				</th>
+				<th ng-show="BtoStateShow">
+					<button  ng-click="sort('BtoState')">Bill to State</button>
+				</th>
+				<th ng-show="BtoZipShow">
+					<button ng-click="sort('BtoZip')">Bill to Zip</button>
+				</th>
+				<th ng-show="BtoCountryShow">
+					<button ng-click="sort('BtoCountry')">Bill to Country</button>
+				</th>
+				<th ng-hide="StoAddrShow">
+					<button ng-click="sort('StoAddr')">Ship to Address</button>
+				</th>
+				<th ng-hide="StoCityShow">
+					<button ng-click="sort('StoCity')">Ship to City</button>
+				</th>
+				<th ng-hide="StoStateShow">
+					<button ng-click="sort('StoState')">Ship to State</button>
+				</th>
+				<th ng-hide="StoZipShow">
+					<button ng-click="sort('StoZip')">Ship to Zip</button>
+				</th>
+				<th ng-hide="StoCountryShow">
+					<button ng-click="sort('StoCountry')">Ship to Country</button>
+				</th>
+				<th ng-hide="cPhoneShow">
+					<button ng-click="sort('cPhone')">Phone Number</button>
+				</th>
+				<th ng-hide="tNumShow">
+					<button ng-click="sort('tNum')">Tracking Number</button>
+				</th>
+				<th ng-hide="sLabelShow">
+					<button ng-click="sort('sLabel')">Shipping Label</button>
+				</th>
+				<th ng-hide="postIDShow">
+					<button ng-click="sort('postID')"> Post ID</button>
+				</th>
+				<th ng-hide="userShow">
+					<button ng-click="sort('user')">Added By User</button>
+				</th>
+				<th ng-hide="orderIDShow">
+					<button ng-click="sort('orderID')">Order ID</button>
+				</th>
+				<th ng-hide="dateShow">
+					<button ng-click="sort('date')">Date Added</button>
+				</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+			<tr ng-repeat="order in orders | orderBy:sortmethod:reverse">
+			<td ng-hide="itemNameShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.itemName" placeholder="{{order.itemName}}">
+			</td>
+			<td ng-hide="pMethodShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.pMethod" placeholder="{{order.pMethod}}">
+			</td>
+			<td ng-hide="itemPriceShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.itemPrice" placeholder="{{order.itemPrice}}">
+			</td>
+			<td ng-hide="orderStatusShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.orderStatus" placeholder="{{order.orderStatus}}">
+			</td>
+			<td ng-hide="cFnameShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.cFname" placeholder="{{order.cFname}}">
+			</td>
+			<td ng-hide="cLnameShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.cLname" placeholder="{{order.cLname}}">
+			</td>
+			<td ng-show="ccNumberShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.ccNumber" placeholder="{{order.ccNumber}}">
+			</td>
+			<td ng-show="ccExpDateShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.ccExpDate" placeholder="{{order.ccExpDate}}">
+			</td>
+			<td ng-show="ccCodeShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.ccCode" placeholder="{{order.ccCode}}">
+			</td>
+			<td ng-show="BtoAddrShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.BtoAddr" placeholder="{{order.BtoAddr}}">
+			</td>
+			<td ng-show="BtoCityShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.BtoCity" placeholder="{{order.BtoCity}}">
+			</td>
+			<td ng-show="BtoStateShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.BtoState" placeholder="{{order.BtoState}}">
+			</td>
+			<td ng-show="BtoZipShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.BtoZip" placeholder="{{order.BtoZip}}">
+			</td>
+			<td ng-show="BtoCountryShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.BtoCountry" placeholder="{{order.BtoCountry}}">
+			</td>
+			<td ng-hide="StoAddrShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.StoAddr" placeholder="{{order.StoAddr}}">
+			</td>
+			<td ng-hide="StoCityShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.StoCity" placeholder="{{order.StoCity}}">
+			</td>
+			<td ng-hide="StoStateShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.StoState" placeholder="{{order.StoState}}">
+			</td>
+			<td ng-hide="StoZipShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.StoZip" placeholder="{{order.StoZip}}">
+			</td>
+			<td ng-hide="StoCountryShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.StoCountry" placeholder="{{order.StoCountry}}">
+			</td>
+			<td ng-hide="cPhoneShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.cPhone" placeholder="{{order.cPhone}}">
+			</td>
+			<td ng-hide="tNumShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.tNum" placeholder="{{order.tNum}}">
+			</td>
+			<td ng-hide="sLabelShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.sLabel" placeholder="{{order.sLabel}}">
+			</td>
+			<td ng-hide="postIDShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.postID" placeholder="{{order.postID}}">
+			</td>
+			<td ng-hide="userShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.user" placeholder="{{order.user}}">
+			</td>
+			<td ng-hide="userShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.orderID" placeHolder="{{order.orderID}}">
+			</td>
+			<td ng-hide="dateShow">
+				<input type="text" name="OrderEdit" class="form-control" ng-model="order.date" placeholder="{{order.date}}">
+				<input type="hidden" name="OrderEdit" class="form-control" ng-model="order._id">
+			</td>
+			<td>
+				<button type="button" class="btn btn-warning" ng-click="editOrder(order)">Update</button>
+			</td>
+			<td>
+				<button type='submit' class='btn btn-danger' ng-click="deleteOrder(order._id)">Delete</button>
+			</td>
+			</tr>
+			</table>
+		</div>
+		<div>
+			<form name='OrderFrom' ng-submit='createOrder()'>
+				<div class='form-group'>
+					<label>Item Name</label>
+					<input type='text' name='cFname' class='form-control' ng-model='order.itemName'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label>Payment Method</label>
+					<input type='text' name='cFname' class='form-control' ng-model='order.pMethod'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label>Item Price</label>
+					<input type='text' name='cFname' class='form-control' ng-model='order.itemPrice'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label>Order Status</label>
+					<input type='text' name='cFname' class='form-control' ng-model='order.orderStatus'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label>First Name</label>
+					<input type='text' name='cFname' class='form-control' ng-model='order.cFname'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label>Last Name</label>
+					<input type='text' name='cLname' class='form-control' ng-model='order.cLname'>
+					<span ng-show='errorClName'>{{errorClName}}</span>
+				</div>
+				<div class='form-group'>
+					<label>CC Number</label>
+					<input type='text' name='ccNumber' class='form-control' ng-model='order.ccNumber'>
+					<span ng-show='errorCCnumber'>{{errorCCnumber}}</span>
+				</div>
+				<div class='form-group'>
+					<label> CC Exp. Date</label>
+					<input type='text' name='ccExpDate' class='form-control' ng-model='order.ccExpDate'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> CC Code</label>
+					<input type='text' name='ccCode' class='form-control' ng-model='order.ccCode'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Bill to Address</label>
+					<input type='text' name='BtoAddr' class='form-control' ng-model='order.BtoAddr'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Bill to City</label>
+					<input type='text' name='BtoCity' class='form-control' ng-model='order.BtoCity'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Bill to State</label>
+					<input type='text' name='BtoState' class='form-control' ng-model='order.BtoState'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Bill to Zip</label>
+					<input type='text' name='BtoZip' class='form-control' ng-model='order.BtoZip'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Bill to Country</label>
+					<input type='text' name='BtoCountry' class='form-control' ng-model='order.BtoCountry'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Ship to Address</label>
+					<input type='text' name='StoAddr' class='form-control' ng-model='order.StoAddr'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Ship to City</label>
+					<input type='text' name='StoCity' class='form-control' ng-model='order.StoCity'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Ship to State</label>
+					<input type='text' name='StoState' class='form-control' ng-model='order.StoState'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Ship to Zip</label>
+					<input type='text' name='StoZip' class='form-control' ng-model='order.StoZip'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Ship to Country</label>
+					<input type='text' name='StoCountry' class='form-control' ng-model='order.StoCountry'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Phone Number</label>
+					<input type='text' name='cPhone' class='form-control' ng-model='order.cPhone'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Tracking Number</label>
+					<input type='text' name='cPhone' class='form-control' ng-model='order.tNum'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Shipping Label</label>
+					<input type='text' name='cPhone' class='form-control' ng-model='order.sLabel'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> Post ID</label>
+					<input type='text' name='cPhone' class='form-control' ng-model='order.postID'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<div class='form-group'>
+					<label> User</label>
+					<input type='text' name='cPhone' class='form-control' ng-model='order.user'>
+					<span ng-show='errorCfName'>{{errorCfName}}</span>
+				</div>
+				<button type='submit' class='btn btn-success'>Create</button>
+			</form>
+		</div>

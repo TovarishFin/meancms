@@ -37,4 +37,14 @@ angular.module('MainAppConfig',['ui.router'])
 					}]
 				}
 			})
+			.state('orders', {
+				url: '/orders',
+				templateUrl: 'html/orders.html',
+				controller: 'OrderCtrl',
+				resolve: {
+					orders: ['apiCall', function(apiCall){
+						return apiCall.getOrders();
+					}]
+				}
+			})
 	}]);

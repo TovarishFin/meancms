@@ -6,7 +6,7 @@ angular.module('MainAppController',[])
 	.controller('ProdCtrl', ['$scope', 'apiCall', function($scope, apiCall){
 		$scope.products=apiCall.stuff;
 		
-		$scope.sortmethod='prodName';
+		$scope.sortmethod='';
 		$scope.reverse=false;		
 		$scope.sort = function(sortmethod) {
 		$scope.reverse = ($scope.sortmethod === sortmethod) ? !$scope.reverse :$scope.reverse;
@@ -29,7 +29,7 @@ angular.module('MainAppController',[])
 	.controller('pMethodCtrl',['$scope', 'apiCall',function($scope, apiCall){
 		$scope.pMethods=apiCall.stuff;
 		
-		$scope.sortmethod='type';
+		$scope.sortmethod='';
 		$scope.reverse=false;		
 		$scope.sort = function(sortmethod) {
 		$scope.reverse = ($scope.sortmethod === sortmethod) ? !$scope.reverse :$scope.reverse;
@@ -54,7 +54,7 @@ angular.module('MainAppController',[])
 	.controller('CustomerCtrl', ['$scope', 'apiCall', function($scope, apiCall){
 		$scope.customers= apiCall.stuff;
 		
-		$scope.sortmethod='fName';
+		$scope.sortmethod='';
 		$scope.reverse=false;		
 		$scope.sort = function(sortmethod) {
 		$scope.reverse = ($scope.sortmethod === sortmethod) ? !$scope.reverse :$scope.reverse;
@@ -72,5 +72,27 @@ angular.module('MainAppController',[])
 		
 		$scope.deleteCustomer=function(id){
 			apiCall.deleteCustomer(id);
+		};
+	}])
+	.controller('OrderCtrl', ['$scope', 'apiCall', function($scope, apiCall){
+		$scope.orders = apiCall.stuff;
+		
+		$scope.sortmethod='';
+		$scope.reverse=false;		
+		$scope.sort = function(sortmethod) {
+		$scope.reverse = ($scope.sortmethod === sortmethod) ? !$scope.reverse :$scope.reverse;
+		$scope.sortmethod = sortmethod;
+		};
+		
+		$scope.createOrder=function(){
+			apiCall.createOrder($scope.order);
+		};
+		
+		$scope.editOrder=function(order){
+			apiCall.updateOrder(order);
+		};
+		
+		$scope.deleteOrder=function(id){
+			apiCall.deleteOrder(id);
 		};
 	}])

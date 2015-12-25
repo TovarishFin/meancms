@@ -1,8 +1,10 @@
 angular.module('MainAppServices',[])
 	.factory('apiCall', ['$http', function($http){
 		var call = {
+			//container for any returned data which is stored to scope
 			stuff: []
 		};
+			//api calls for products
 			call.getProducts = function(){
 				return $http.get('/api/products').success(function(data){
 				angular.copy(data, call.stuff);
@@ -23,6 +25,7 @@ angular.module('MainAppServices',[])
 					call.getProducts();
 				});
 			};
+			//api calls for payment methods
 			call.getPmethods = function(){
 				return $http.get('/api/pmethods').success(function(data){
 					angular.copy(data, call.stuff);
@@ -43,6 +46,7 @@ angular.module('MainAppServices',[])
 					call.getProducts();
 				});
 			};
+			//api calls for customers
 			call.getCustomers = function(){
 				return $http.get('/api/customers').success(function(data){
 					angular.copy(data, call.stuff);
@@ -61,6 +65,27 @@ angular.module('MainAppServices',[])
 			call.deleteCustomer = function(id){
 				return $http.post('/api/customers/delete',{'_id': id}).success(function(data){
 					call.getCustomers();
+				});
+			};
+			// api calls for orders
+			call.getOrders = function(){
+				return $http.get('/api/orders').success(function(data){
+					angular.copy(data, call.stuff);
+				});
+			};
+			call.createOrder = function(order){
+				return $http.post('/api/orders', order).success(function(data){
+					call.stuff.push(data);
+				});
+			};
+			call.updateOrder = function(order){
+				return $http.post('/api/orders/update', order).success(function(data){
+					call.getOrders();
+				});
+			};
+			call.deleteOrder = function(id){
+				return $http.post('/api/orders/delete',{'_id': id}).success(function(data){
+					call.getOrders();
 				});
 			};
 					
