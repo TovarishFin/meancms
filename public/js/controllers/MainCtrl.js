@@ -96,3 +96,7 @@ angular.module('MainAppController',[])
 			apiCall.deleteOrder(id);
 		};
 	}])
+	.controller('AddOrderCtrl', ['$scope', 'apiCall', function($scope, apiCall){
+		apiCall.getProducts();
+		$scope.products=apiCall.stuff;
+	}])

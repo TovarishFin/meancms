@@ -43,7 +43,7 @@ angular.module('MainAppServices',[])
 			};
 			call.deletePmethod = function(id){
 				return $http.post('/api/pmethods/delete', {'_id':id}).success(function(data){
-					call.getProducts();
+					call.getPmethods();
 				});
 			};
 			//api calls for customers

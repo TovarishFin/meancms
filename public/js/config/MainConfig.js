@@ -47,4 +47,9 @@ angular.module('MainAppConfig',['ui.router'])
 					}]
 				}
 			})
+			.state('addorder', {
+				url: '/addorder',
+				templateUrl: 'html/addorder.html',
+				controller: 'AddOrderCtrl',
+			})
 	}]);
