@@ -7,11 +7,16 @@
 				<th>
 					<button ng-click="sort('type')">Payment Method Name</button>
 				</th>
+				<th>Edit</th>
 				<th>Delete</th>
 			</tr>
 			<tr ng-repeat="pMethod in pMethods | orderBy:sortmethod:reverse">
-			<td>{{pMethod.type}}</td>
-			<td><button type='submit' class='btn btn-danger' ng-click="deletePmethod(pMethod._id)">Delete</button></td>
+			<td>
+				<input type="text" name="pMethodTypeEdit" class="form-control" ng-model="pMethod.type" placeholder="{{pMethod.type}}">
+				<input type="hidden" name="pMethodIdEdit" class="form-control" ng-model="pMethod._id">
+			</td>
+			<td><button type="button" class="btn btn-warning" ng-click="editPmethod(pMethod)">Update</button></td>
+			<td><button type='button' class='btn btn-danger' ng-click="deletePmethod(pMethod._id)">Delete</button></td>
 			</tr>
 			</table>
 		</div>
@@ -22,7 +27,7 @@
 					<input type='text' name='pMethod' class='form-control' ng-model='pMethod.type'>
 					<span ng-show='errorPmethod'>{{errorPmethod}}</span>
 				</div>
-				<button type='submit' class='btn btn-primary'>Add</button>
+				<button type='submit' class='btn btn-success'>Create</button>
 			</form>
 		</div>
 	</div>

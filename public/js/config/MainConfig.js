@@ -27,4 +27,14 @@ angular.module('MainAppConfig',['ui.router'])
 					}]
 				}
 			})
+			.state('customers', {
+				url: '/customers',
+				templateUrl: 'html/customers.html',
+				controller: 'CustomerCtrl',
+				resolve: {
+					customers: ['apiCall', function(apiCall){
+						return apiCall.getCustomers();
+					}]
+				}
+			})
 	}]);

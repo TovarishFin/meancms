@@ -21,6 +21,17 @@ router.post('/api/products',function(req,res, next){
 	});
 });
 
+router.post('/api/products/update', function(req, res, next){
+	Product.findByIdAndUpdate(req.body._id, { $set: { 
+			prodName: req.body.prodName,
+			prodCode: req.body.prodCode,
+			prodPrice: req.body.prodPrice
+			}}, function (err, product) {
+		if (err) {next(err);}
+		res.json(product);
+	});
+});
+
 router.post('/api/products/delete', function(req,res, next){
 	console.log(req.body._id);
 	Product.findOneAndRemove({'_id':req.body._id},function(err,product){
@@ -44,13 +55,22 @@ router.post('/api/pmethods', function(req,res, next){
 	});
 });
 
+router.post('/api/pmethods/update', function(req, res, next){
+	pMethod.findByIdAndUpdate(req.body._id, { $set: {
+		type: req.body.type
+	}}, function (err, pMethod){
+		if(err){next(err);}
+		res.json(pMethod);
+	});
+});
+
 router.post('/api/pmethods/delete', function(req,res, next){
 	pMethod.findOneAndRemove({'_id':req.body._id},function(err, method){
 		if(err){next(err);}
 		res.json(method);
 	});
 });
-
+/* take care of users when have passport ready and have everything else built...
 router.get('/api/users', function(req,res){
 	User.find({},function(err, users){
 		res.json(users);
@@ -61,14 +81,42 @@ router.post('/api/users', function(req,res){
 	
 });
 
+router.post('/api/users/update', function(req,res){
+	
+});
+
+router.post('/api/users/delete', function(req,res){
+	
+});
+*/
+
 router.get('/api/customers', function(req,res){
 	Customer.find({},function(err, users){
 		res.json(users);
 	});
 });
 
-router.post('/api/custoers', function(req,res){
-	
+router.post('/api/customers', function(req,res){
+	console.log(req.body);
+	newCustomer=new Customer(req.body);
+	newCustomer.save(function(err, customer){
+		if(err){next(err);}
+		res.json(customer);
+	});
+});
+
+router.post('/api/customers/update', function(req,res){
+	Customer.findByIdAndUpdate(req.body._id, { $set:req.body }, function (err, pMethod){
+		if(err){next(err);}
+		res.json(pMethod);
+	});
+});
+
+router.post('/api/customers/delete', function(req,res){
+	Customer.findOneAndRemove({'_id':req.body._id},function(err, customer){
+		if(err){next(err);}
+		res.json(customer);
+	});
 });
 
 router.get('/api/orders', function(req,res){
@@ -77,7 +125,15 @@ router.get('/api/orders', function(req,res){
 	});
 });
 
-router.post('api/orders', function(req,res){
+router.post('/api/orders', function(req,res){
+	
+});
+
+router.post('/api/orders/update',function(req,res){
+	
+});
+
+router.post('/api/orders/delete', function(req,res){
 	
 });
 

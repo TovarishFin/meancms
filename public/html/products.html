@@ -13,16 +13,17 @@
 				<th>
 					<button ng-click="sort('prodPrice')">Product Price</button>
 				</th>
-				<th>
-				<button  ng-click="sort('_id')">Product ID</button>
-				</th>
+				<th>Edit</th>
 				<th>Delete</th>
 			</tr>
 			<tr ng-repeat="product in products | orderBy:sortmethod:reverse">
-			<td>{{product.prodName}}</td>
-			<td>{{product.prodCode}}</td>
-			<td>{{product.prodPrice}}</td>
-			<td>{{product._id}}</td>
+			<td><input type="text" name="prodNameEdit" class="form-control" ng-model="product.prodName" placeholder="{{product.prodName}}"></td>
+			<td><input type="text" name="prodCodeEdit" class="form-control" ng-model="product.prodCode" placeholder="{{product.prodCode}}"></td>
+			<td>
+			<input type="text" name="prodPriceEdit" class="form-control" ng-model="product.prodPrice" placeholder="{{product.prodPrice}}">
+			<input type="hidden" name="prodIdEdit" class="form-control" ng-model="product._id">
+			</td>
+			<td><button type="button" class="btn btn-warning" ng-click="editProduct(product)">Update</button></td>
 			<td><button type='submit' class='btn btn-danger' ng-click="deleteProduct(product._id)">Delete</button></td>
 			</tr>
 			</table>
@@ -44,7 +45,7 @@
 					<input type='text' name='prodPrice' class='form-control' ng-model='product.prodPrice'>
 					<span ng-show='errorProdPrice'>{{errorProdPrice}}</span>
 				</div>
-				<button type='submit' class='btn btn-primary'>Submit</button>
+				<button type='submit' class='btn btn-success'>Create</button>
 			</form>
 		</div>
 	</div>

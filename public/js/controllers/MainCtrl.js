@@ -17,9 +17,13 @@ angular.module('MainAppController',[])
 			apiCall.createProduct($scope.product);
 			$scope.product={};
 		};
+		
+		$scope.editProduct= function(product){
+			apiCall.updateProduct(product);
+		};
+		
 		$scope.deleteProduct=function(id){
 			apiCall.deleteProduct(id);
-			apiCall.getProducts();
 		};
 	}])
 	.controller('pMethodCtrl',['$scope', 'apiCall',function($scope, apiCall){
@@ -36,10 +40,37 @@ angular.module('MainAppController',[])
 			apiCall.createPmethod($scope.pMethod);
 			$scope.pMethod={};
 		};
+		
+		$scope.editPmethod = function(pMethod){
+			apiCall.updatePmethod(pMethod);
+		};
+		
 		$scope.deletePmethod=function(id){
 			apiCall.deletePmethod(id);
-			apiCall.getPmethods();
 		};
 		
 		
-	}]);
+	}])
+	.controller('CustomerCtrl', ['$scope', 'apiCall', function($scope, apiCall){
+		$scope.customers= apiCall.stuff;
+		
+		$scope.sortmethod='fName';
+		$scope.reverse=false;		
+		$scope.sort = function(sortmethod) {
+		$scope.reverse = ($scope.sortmethod === sortmethod) ? !$scope.reverse :$scope.reverse;
+		$scope.sortmethod = sortmethod;
+		};
+		
+		$scope.createCustomer=function(){
+			apiCall.createCustomer($scope.customer);
+			$scope.customer={};
+		};
+		
+		$scope.editCustomer = function(customer){
+			apiCall.updateCustomer(customer);
+		};
+		
+		$scope.deleteCustomer=function(id){
+			apiCall.deleteCustomer(id);
+		};
+	}])
