@@ -112,6 +112,7 @@ angular.module('MainAppController',[])
 		$scope.setOrderProduct=function(product){
 			$scope.newOrder=product;
 			$scope.result=null;
+			$scope.customerResult=null;
 			$scope.productSelected=product;
 		};
 		$scope.orderProcess={};
@@ -136,10 +137,12 @@ angular.module('MainAppController',[])
 					$scope.orderProcess.step=1;
 					$scope.customerSearchText=null;
 				});
+		};
+		$scope.csNewCustomerOrder=function(customer){
 			apiCall.createCustomer(customer)
 				.success(function(data){
 					$scope.customerResult=data;
 				});
-		};
+			};
 		
 	}])

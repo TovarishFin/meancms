@@ -2,7 +2,8 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<span><label>Product Search: <input ng-model="productSearchText" placeholder="Product Name or Code"></label></span>
-			<div ng-show="result.orderID" class="alert alert-success" role="alert">Order for {{result.cFname}} to {{result.StoAddr}} Successful. Feel free to place another order. <ng-show="customerResult">Customer {{customerResult.cFname}} was also added to customers.</ng-show></div>
+			<div ng-show="result.orderID" class="alert alert-success" role="alert">Order for {{result.cFname}} to {{result.StoAddr}} Successful. Feel free to place another order.</div>
+			<div ng-show="customerResult.customerID" class="alert alert-success" role="alert">Customer {{customerResult.cFname}} was also added to customers.</div>
 		</div>
 	<table  class="table table-bordered">
 		<tr>
@@ -80,7 +81,7 @@
 	</table>
 </div>
 <div ng-show="newOrder"> 
-	<form name='cutomerForm' ng-submit='csNewOrder(customer, newOrder)'>
+	<form name='cutomerForm' ng-submit='csNewOrder(customer, newOrder); csNewCustomerOrder(customer)'>
 		<div class='form-group'>
 			<label>First Name</label>
 			<input type='text' name='cFname' class='form-control' ng-model='customer.cFname'>

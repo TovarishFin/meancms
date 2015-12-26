@@ -103,7 +103,7 @@ router.post('/api/customers', function(req,res,next){
 	newCustomer=new Customer(req.body);
 	newCustomer.customerID=shortid.generate();
 	newCustomer.save(function(err, customer){
-		if(err){next(err);}
+		if(err){console.log(err);}
 		res.json(customer);
 	});
 });
@@ -131,6 +131,7 @@ router.get('/api/orders', function(req,res){
 router.post('/api/orders', function(req,res,next){
 	newOrder=new Order(req.body);
 	newOrder.orderID=shortid.generate();
+	newOrder.orderStatus=0;
 	newOrder.save(function(err, order){
 		if(err){next(err);}
 		res.json(order);
