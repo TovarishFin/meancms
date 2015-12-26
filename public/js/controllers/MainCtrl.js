@@ -117,8 +117,8 @@ angular.module('MainAppController',[])
 		$scope.orderProcess={};
 		$scope.orderProcess.step=1;
 		
-		$scope.setOrderCustomer=function(id){
-			$scope.customerSelected=id
+		$scope.setOrderCustomer=function(customer){
+			$scope.customerSelected=customer
 			$scope.orderProcess.step=2;
 		};
 		

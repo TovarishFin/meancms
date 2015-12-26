@@ -40,6 +40,9 @@
 <div ng-show="newOrder" class="alert alert-warning" role="alert">
 	You have selected the product named <b>{{newOrder.prodName}}</b> costing <b>{{newOrder.prodPrice | currency}}</b>. The product code is <b>{{newOrder.prodCode}}</b>.
 </div>
+<div ng-show="customerSelected" class="alert alert-warning" role="alert">
+	You have selected customer <b>{{customerSelected.cFname}}</b> <b>{{customerSelected.cLname}}</b> with the shipping address of <b>{{customerSelected.StoAddr}}, {{customerSelected.StoCity}}, {{customerSelected.StoZip}}, {{customerSelected.StoState}}, {{customerSelected.StoCountry}}</b>.
+</div>
 <div ng-show="newOrder" class="panel panel-default">
 	<div class="panel-heading">
 	<span><label>Add an existing customer by searching here: <input ng-model="customerSearchText" placeholder="Product Name or Code"></label></span>
@@ -70,8 +73,8 @@
 				{{customer.BtoAddr}}, {{customer.BtoCity}}, {{customer.BtoState}}, {{customer.BtoCountry}}
 			</td>
 			<td>
-				<button ng-show="orderProcess.step===1" class="btn btn-warning" ng-click="setOrderCustomer(customer._id)">Place Order</button>
-				<button ng-show="orderProcess.step===2 && customerSelected===customer._id" class="btn btn-success"  ng-click="csNewOrder(customer, newOrder)">Confirm Order</button>
+				<button ng-hide="customerSelected._id===customer._id" class="btn btn-warning" ng-click="setOrderCustomer(customer)">Place Order</button>
+				<button ng-show="orderProcess.step===2 && customerSelected._id===customer._id" class="btn btn-success"  ng-click="csNewOrder(customer, newOrder)">Confirm Order</button>
 			</td>
 		</tr>
 	</table>
