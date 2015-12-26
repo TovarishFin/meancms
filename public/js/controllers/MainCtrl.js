@@ -62,7 +62,10 @@ angular.module('MainAppController',[])
 		};
 		
 		$scope.createCustomer=function(){
-			apiCall.createCustomer($scope.customer);
+			apiCall.createCustomer($scope.customer)
+				.success(function(data){
+					call.stuff.push(data);
+				});
 			$scope.customer={};
 		};
 		
@@ -85,7 +88,10 @@ angular.module('MainAppController',[])
 		};
 		
 		$scope.createOrder=function(){
-			apiCall.createOrder($scope.order);
+			apiCall.createOrder($scope.order)
+				.success(function(data){
+					apiCall.stuff.push(data);
+				});
 		};
 		
 		$scope.editOrder=function(order){
@@ -99,4 +105,41 @@ angular.module('MainAppController',[])
 	.controller('AddOrderCtrl', ['$scope', 'apiCall', function($scope, apiCall){
 		apiCall.getProducts();
 		$scope.products=apiCall.stuff;
+		
+		apiCall.getCustomers2();
+		$scope.customers=apiCall.stuff2;
+		
+		$scope.setOrderProduct=function(product){
+			$scope.newOrder=product;
+			$scope.result=null;
+			$scope.productSelected=product;
+		};
+		$scope.orderProcess={};
+		$scope.orderProcess.step=1;
+		
+		$scope.setOrderCustomer=function(id){
+			$scope.customerSelected=id
+			$scope.orderProcess.step=2;
+		};
+		
+		$scope.csNewOrder=function(customer, newOrder){
+			for (var x in customer){
+				newOrder[x]=customer[x];
+				delete newOrder['_id'];
+			};
+			apiCall.createOrder(newOrder)
+				.success(function(data){
+					$scope.result=data;
+					$scope.newOrder=null;
+					$scope.productSelected=null;
+					$scope.customerSelected=null;
+					$scope.orderProcess.step=1;
+					$scope.customerSearchText=null;
+				});
+			apiCall.createCustomer(customer)
+				.success(function(data){
+					$scope.customerResult=data;
+				});
+		};
+		
 	}])

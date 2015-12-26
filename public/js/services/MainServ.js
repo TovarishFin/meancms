@@ -2,7 +2,8 @@ angular.module('MainAppServices',[])
 	.factory('apiCall', ['$http', function($http){
 		var call = {
 			//container for any returned data which is stored to scope
-			stuff: []
+			stuff: [],
+			stuff2: []
 		};
 			//api calls for products
 			call.getProducts = function(){
@@ -52,10 +53,15 @@ angular.module('MainAppServices',[])
 					angular.copy(data, call.stuff);
 				});
 			};
-			call.createCustomer = function(customer){
-				return $http.post('/api/customers', customer).success(function(data){
-					call.stuff.push(data);
+			//had to add another due to needing two services on one page... better way to do this???
+			call.getCustomers2 = function(){
+				return $http.get('/api/customers').success(function(data){
+					angular.copy(data, call.stuff2);
 				});
+			};
+			//removed promise... need to update others...
+			call.createCustomer = function(customer){
+				return $http.post('/api/customers', customer)
 			};
 			call.updateCustomer = function(customer){
 				return $http.post('/api/customers/update', customer).success(function(data){
@@ -73,10 +79,9 @@ angular.module('MainAppServices',[])
 					angular.copy(data, call.stuff);
 				});
 			};
+			//moving promise to the controller... might want to do this for the rest...
 			call.createOrder = function(order){
-				return $http.post('/api/orders', order).success(function(data){
-					call.stuff.push(data);
-				});
+				return $http.post('/api/orders', order)
 			};
 			call.updateOrder = function(order){
 				return $http.post('/api/orders/update', order).success(function(data){
