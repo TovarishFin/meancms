@@ -1,0 +1,50 @@
+<!-- ANGULAR DYNAMIC CONTENT -->
+<p ng-show="testobj.test">testing this shit</p>
+<button ng-click="test" ng-show="testobj.test">tested</button>
+<button ng-click="test" ng-hide="testobj.test">test</button>
+<div class="panel panel-default">
+	<div class="panel-heading">Toggle Views</div>
+<table class="table table-bordered">
+<tr>
+	<td ng-repeat="toggle in toggles | limitTo: 10">
+		<button ng-hide="toggleState[toggle]" class="btn btn-success" ng-click="toggleShow(toggle)">{{toggle}}</button>
+		<button ng-show="toggleState[toggle]" class="btn btn-danger" ng-click="toggleShow(toggle)">{{toggle}}</button>
+	</td>
+	
+</tr>
+<tr>
+	<td ng-repeat="toggle in toggles | limitTo: 10:10">
+		<button ng-hide="toggleState[toggle]" class="btn btn-success" ng-click="toggleShow(toggle)">{{toggle}}</button>
+		<button ng-show="toggleState[toggle]" class="btn btn-danger" ng-click="toggleShow(toggle)">{{toggle}}</button>
+	</td>
+	
+</tr>
+<tr>
+	<td ng-repeat="toggle in toggles | limitTo: 10:20">
+		<button ng-hide="toggleState[toggle]" class="btn btn-success" ng-click="toggleShow(toggle)">{{toggle}}</button>
+		<button ng-show="toggleState[toggle]" class="btn btn-danger" ng-click="toggleShow(toggle)">{{toggle}}</button>
+	</td>
+	
+</tr>
+</table>
+</div>
+</div>
+<table class="table table-bordered">
+	<tr ng-repeat="order in orders | limitTo:1">
+		<th ng-repeat="(key, val) in order" ng-hide="toggleState[key]">
+			{{key}}
+		</th>
+		<th>
+			Run Payment
+		</th>
+	</tr>
+	<tr ng-repeat="order in orders">
+		<th ng-repeat="(key, val) in order" ng-hide="toggleState[key]" >
+			{{val}}
+		</th>
+		<th>
+			<button ng-hide="orderSelected" class="btn btn-warning" ng-click="orderSelected=true">Run Payment</button>
+			<button ng-show="orderSelected" class="btn btn-success" ng-click="runPayment(order)">Confirm</button>
+		</th>
+	</tr>
+</table>

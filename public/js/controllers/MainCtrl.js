@@ -146,3 +146,23 @@ angular.module('MainAppController',[])
 			};
 		
 	}])
+	.controller('PayCtrl', ['$scope', 'apiCall', 'toggleServ', function($scope, apiCall, toggleServ){
+		//call to get orders and also the view toggles that go with the recieved data...
+		$scope.orders=apiCall.stuff;
+		toggleServ.getToggleValues($scope.orders);
+		//toggle functionality from services
+		$scope.toggles=toggleServ.toggleValues;
+		$scope.toggleState=toggleServ.paymentToggleState;
+		$scope.toggleShow=function(toggle){
+			toggleServ.toggleShow(toggle);
+			$scope.toggleState=toggleServ.paymentToggleState;
+		};
+		//send run payment signal to the server
+		$scope.runPayment=function(order){
+			apiCall.runPayment(order)
+				.success(function(data){
+					$scope.test=data;
+					apiCall.findOrdersByStatus(0);
+				});
+		};
+	}])

@@ -93,7 +93,57 @@ angular.module('MainAppServices',[])
 					call.getOrders();
 				});
 			};
+			call.findOrdersByStatus = function(orderStatus){
+				return $http.get('/api/orders/'+orderStatus).success(function(data){
+					angular.copy(data, call.stuff);
+				});
+			};
+			//send out payment info to server... callback in controller
+			call.runPayment = function(order){
+				return $http.post('/api/payments', order)
+			};
 					
 		return call;
-}]);
+	}])
+	.factory('toggleServ',[ function(){
+		toggle={}
+		toggle.paymentToggleState={
+			"_id":true,
+			"itemName":false,
+			"pMethod":false,
+			"itemPrice":false,
+			"orderStatus":true,
+			"cFname":false,
+			"cLname":false,
+			"ccNumber":false,
+			"ccExpDate":false,
+			"ccCode":false,
+			"BtoAddr":false,
+			"BtoCity":false,
+			"BtoState":false,
+			"BtoZip":false,
+			"BtoCountry":false,
+			"StoAddr":true,
+			"StoCity":true,
+			"StoState":true,
+			"StoZip":true,
+			"StoCountry":true,
+			"cPhone":true,
+			"orderID":true,
+			"__v":true,
+			"date":true
+			};
+		toggle.toggleShow=function(toggleVar){
+			(toggle.paymentToggleState[toggleVar] ? toggle.paymentToggleState[toggleVar]=false : toggle.paymentToggleState[toggleVar]=true);
+			};
+		toggle.testobj={"test":false};
+		toggle.test=function(test){
+			(test ? test=false : test=true);
+		};
+		toggle.getToggleValues=function(mainData){
+			toggle.toggleValues=Object.keys(mainData[0]);
+		};
+			
+		return toggle;
+	}])
 

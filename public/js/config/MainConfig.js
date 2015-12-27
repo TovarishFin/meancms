@@ -52,4 +52,14 @@ angular.module('MainAppConfig',['ui.router'])
 				templateUrl: 'html/addorder.html',
 				controller: 'AddOrderCtrl',
 			})
+			.state('runPayments',{
+				url: '/runpayments',
+				templateUrl: 'html/runpayments.html',
+				controller: 'PayCtrl',
+				resolve: {
+					orders: ['apiCall', function(apiCall){
+						return apiCall.findOrdersByStatus(0);
+					}]
+				}
+			})
 	}]);

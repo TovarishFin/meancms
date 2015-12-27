@@ -152,6 +152,26 @@ router.post('/api/orders/delete', function(req,res){
 	});
 });
 
+//get all orders in a given order status...
+router.get('/api/orders/:orderStatus', function(req,res){
+	Order.find({orderStatus: req.params.orderStatus}, function(err, orders){
+		res.json(orders);
+	});
+});
+
+router.post('/api/payments', function(req,res){
+	//need to get different api than stripe to get that shit working in here...
+	//in the meantime i am going to juse simulate that it went fine and payment went through along with moving to new status...
+	Order.findByIdAndUpdate(req.body._id, { $set:{orderStatus:1} }, function (err, order){
+		if(err){
+			console.log(err);
+		} else {
+			res.json(order);
+		};
+	});
+});
+
+//catch all other paths noot defined above...
 router.get('*', function(req, res, next) {
   res.render('index', { title: 'MEAN CMS' });
 });
