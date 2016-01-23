@@ -58,8 +58,29 @@ angular.module('MainAppConfig',['ui.router'])
 				controller: 'PayCtrl',
 				resolve: {
 					orders: ['apiCall', function(apiCall){
-						return apiCall.findOrdersByStatus(0);
+						return apiCall.getOrdersByStatus(0);
 					}]
 				}
 			})
+			.state('approve', {
+				url: '/approve',
+				templateUrl: 'html/approve.html',
+				controller: 'ApprCtrl',
+				resolve: {
+					orders: ['apiCall', function(apiCall){
+						return apiCall.getOrdersByStatus(1);
+					}]
+				}
+			})
+			.state('printorders', {
+				url: '/printorders',
+				templateUrl: 'html/printorders.html',
+				controller: 'PrintCtrl',
+				resolve: {
+					orders: ['apiCall', function(apiCall){
+						return apiCall.getOrdersByStatus(3);
+					}]
+				}
+			})
+			
 	}]);

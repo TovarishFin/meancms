@@ -129,12 +129,49 @@ router.get('/api/orders', function(req,res){
 });
 
 router.post('/api/orders', function(req,res,next){
+	orderGenesis={
+		prodName: 0,
+		pMethod: 0,
+		prodPrice: 0,
+		orderStatus: 0,
+		cFname: 0,
+		cLname: 0,
+		ccNumber: 0,
+		ccExpDate: 0,
+		ccCode: 0,
+		BtoAddr: 0,
+		BtoCity: 0,
+		BtoState: 0,
+		BtoZip: 0,
+		BtoCountry: 0,
+		StoAddr: 0,
+		StoCity: 0,
+		StoState: 0,
+		StoZip: 0,
+		StoCountry: 0,
+		orderID: 0,
+		cPhone: 0,
+		tNum: 0,
+		sLabel: 0,
+		postID:0,
+		user:0,
+		date:0
+	}
 	newOrder=new Order(req.body);
+	console.log(newOrder.prodName);
 	newOrder.orderID=shortid.generate();
-	newOrder.orderStatus=0;
+	for(var x in orderGenesis){
+		if(!newOrder[x]){
+			newOrder[x]=orderGenesis[x];
+		};
+	};
+	console.log(newOrder);
 	newOrder.save(function(err, order){
-		if(err){next(err);}
-		res.json(order);
+		if(err){
+			console.log(err);
+		} else {
+			res.json(order);
+		}
 	});
 });
 
@@ -158,11 +195,41 @@ router.get('/api/orders/:orderStatus', function(req,res){
 		res.json(orders);
 	});
 });
-
+//get rid of when done with single route
 router.post('/api/payments', function(req,res){
 	//need to get different api than stripe to get that shit working in here...
 	//in the meantime i am going to juse simulate that it went fine and payment went through along with moving to new status...
 	Order.findByIdAndUpdate(req.body._id, { $set:{orderStatus:1} }, function (err, order){
+		if(err){
+			console.log(err);
+		} else {
+			res.json(order);
+		};
+	});
+});
+
+router.post('/api/orders/approve', function(req,res){
+	Order.findByIdAndUpdate(req.body._id, { $set:{orderStatus:2} }, function (err, order){
+		if(err){
+			console.log(err);
+		} else {
+			res.json(order);
+		};
+	});
+});
+
+router.post('/api/orders/deny', function(req,res){
+	Order.findByIdAndUpdate(req.body._id, { $set:{orderStatus:-2} }, function (err, order){
+		if(err){
+			console.log(err);
+		} else {
+			res.json(order);
+		};
+	});
+});
+
+router.post('/api/orders/newStatus', function(req,res){
+	Order.findByIdAndUpdate(req.body._id, {$set:{orderStatus: req.body.orderStatus} }, function(err, order){
 		if(err){
 			console.log(err);
 		} else {

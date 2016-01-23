@@ -1,0 +1,55 @@
+<!-- ANGULAR DYNAMIC CONTENT -->
+<div class="panel panel-default">
+	<div class="panel-heading">Toggle Views</div>
+	<h1 ng-hide="orders[0]">No Orders</h1>
+<table class="table table-bordered">
+<tr>
+	<td ng-repeat="toggle in toggles | limitTo: 10">
+		<button ng-hide="toggleState[toggle]" class="btn btn-success" ng-click="toggleShow(toggle)">{{toggle}}</button>
+		<button ng-show="toggleState[toggle]" class="btn btn-danger" ng-click="toggleShow(toggle)">{{toggle}}</button>
+	</td>
+	
+</tr>
+<tr>
+	<td ng-repeat="toggle in toggles | limitTo: 10:10">
+		<button ng-hide="toggleState[toggle]" class="btn btn-success" ng-click="toggleShow(toggle)">{{toggle}}</button>
+		<button ng-show="toggleState[toggle]" class="btn btn-danger" ng-click="toggleShow(toggle)">{{toggle}}</button>
+	</td>
+	
+</tr>
+<tr>
+	<td ng-repeat="toggle in toggles | limitTo: 10:20">
+		<button ng-hide="toggleState[toggle]" class="btn btn-success" ng-click="toggleShow(toggle)">{{toggle}}</button>
+		<button ng-show="toggleState[toggle]" class="btn btn-danger" ng-click="toggleShow(toggle)">{{toggle}}</button>
+	</td>
+	
+</tr>
+</table>
+</div>
+</div>
+<table class="table table-bordered">
+	<tr ng-repeat="order in orders | limitTo:1">
+		<th ng-repeat="(key, val) in order" ng-hide="toggleState[key]">
+			{{key}}
+		</th>
+		<th>
+			Approve
+		</th>
+		<th>
+			Deny
+		</th>
+	</tr>
+	<tr ng-repeat="order in orders">
+		<th ng-repeat="(key, val) in order" ng-hide="toggleState[key]" >
+			{{val}}
+		</th>
+		<th>
+			<button ng-hide="approveOrderSelected" class="btn btn-warning" ng-click="approveOrderSelected=true">Approve</button>
+			<button ng-show="approveOrderSelected" class="btn btn-success" ng-click="approveOrder(order)">Confirm</button>
+		</th>
+		<th>
+			<button ng-hide="denyOrderSelected" class="btn btn-warning" ng-click="denyOrderSelected=true">Deny</button>
+			<button ng-show="denyOrderSelected" class="btn btn-danger" ng-click="denyOrder(order)">Confirm</button>
+		</th>
+	</tr>
+</table>

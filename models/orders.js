@@ -1,8 +1,8 @@
 var mongoose=require('mongoose');
 var OrderSchema = new mongoose.Schema({
-	itemName: String,
+	prodName: String,
 	pMethod: String,
-	itemPrice: Number,
+	prodPrice: Number,
 	orderStatus: Number,
 	cFname: String,
 	cLname: String,

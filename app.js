@@ -11,6 +11,8 @@ require('./models/orders.js');
 require('./models/pmethods.js');
 require('./models/products.js');
 require('./models/users.js');
+var shippingLabelService = require('./services/createShippingLabels.js');
+var checkShipStatus = require('./services/checkShipStatus.js');
 var routes = require('./routes/index');
 
 
@@ -61,5 +63,12 @@ app.use(function(err, req, res, next) {
   });
 });
 
+//recurring services
+//check find orders that need labels, create them, and change status...
+shippingLabelService.createShippingLabel();
+
+//check on orders that have been printed and see if they have shipped out yet..
+checkShipStatus.checkShipStatusTest();
+checkShipStatus.checkShipStatusLive();
 
 module.exports = app;

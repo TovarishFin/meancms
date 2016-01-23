@@ -46,7 +46,7 @@
 </div>
 <div ng-show="newOrder" class="panel panel-default">
 	<div class="panel-heading">
-	<span><label>Add an existing customer by searching here: <input ng-model="customerSearchText" placeholder="Product Name or Code"></label></span>
+	<span><label>Add an existing customer by searching here: <input ng-model="customerSearchText" placeholder="customer name"></label></span>
 	</div>
 	<table  class="table table-bordered" ng-show="customerSearchText.length>2">
 		<tr>
@@ -91,6 +91,12 @@
 			<label>Last Name</label>
 			<input type='text' name='cLname' class='form-control' ng-model='customer.cLname'>
 			<span ng-show='errorClName'>{{errorClName}}</span>
+		</div>
+		<div class='form-group'>
+			<label> Payment Method</label>
+			<select ng-model="customer.pMethod">
+				<option ng-repeat="pMethod in pMethods">{{pMethod.type}}</option>
+			</select>
 		</div>
 		<div class='form-group'>
 			<label>CC Number</label>

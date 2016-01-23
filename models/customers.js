@@ -17,6 +17,7 @@ var CustomerSchema = new mongoose.Schema({
 	StoZip: Number,
 	StoCountry: String,
 	cPhone: Number,
-	customerID: String
+	customerID: String,
+	pMethod: String
 });
 mongoose.model('Customer', CustomerSchema);
