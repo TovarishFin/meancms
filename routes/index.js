@@ -7,7 +7,9 @@ var pMethod = mongoose.model('pMethod');
 var User = mongoose.model('User');
 var Customer = mongoose.model('Customer');
 var Order = mongoose.model('Order');
-
+var passport = require('passport');
+var authController = require('../controllers/auth');
+var isLoggedIn = require('../controllers/loggedin');
 
 router.get('/api/products', function(req,res){
 	Product.find({}, function(err, products){
@@ -238,8 +240,19 @@ router.post('/api/orders/newStatus', function(req,res){
 	});
 });
 
+router.get('/login', function(req,res){
+	res.render('login');
+});
+
+router.post('/login', authController.isAuthenticated);
+
+router.get('/logout',function(req,res){
+	req.logout();
+	res.redirect('/login');
+});
+
 //catch all other paths noot defined above...
-router.get('*', function(req, res, next) {
+router.get('*', isLoggedIn.isLoggedIn, function(req, res, next) {
   res.render('index', { title: 'MEAN CMS' });
 });
 
