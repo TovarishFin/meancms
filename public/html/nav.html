@@ -14,24 +14,24 @@
 		<li><a ui-sref="approve">Approve Orders</a></li>
 		<li><a ui-sref="printorders">Print Orders</a></li>
 		<li><a ui-sref="register">Register New User</a></li>
-		<li><a href="/logout">Logout</a></li>
+		<li><a href="/reqauth/logout">Logout</a></li>
 	</ul>
 	<ul ng-show="usertype==='wh'" class="nav navbar-nav">
 		<li><a ui-sref="home">Home</a></li>
 		<li><a ui-sref="printorders">Print Orders</a></li>
-		<li><a href="/logout">Logout</a></li>
+		<li><a href="/reqauth/logout">Logout</a></li>
 	</ul>
 		<ul ng-show="usertype==='qa'" class="nav navbar-nav">
 		<li><a ui-sref="home">Home</a></li>
 		<li><a ui-sref="approve">Approve Orders</a></li>
-		<li><a href="/logout">Logout</a></li>
+		<li><a href="/reqauth/logout">Logout</a></li>
 	</ul>
 		<ul ng-show="usertype==='cs'" class="nav navbar-nav">
 		<li><a ui-sref="home">Home</a></li>
 		<li><a ui-sref="customers">Customers</a></li>
 		<li><a ui-sref="orders">Orders</a></li>
 		<li><a ui-sref="addorder">Add Order</a></li>
-		<li><a href="/logout">Logout</a></li>
+		<li><a href="/reqauth/logout">Logout</a></li>
 	</ul>
 	</div>
 </nav>
