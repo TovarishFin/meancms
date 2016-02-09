@@ -1,2 +1,2 @@
-angular.module('MainApp',['MainAppController', 'MainAppServices', 'MainAppConfig', 'angular-toArrayFilter']);
+angular.module('MainApp',['MainAppController', 'MainAppServices', 'MainAppConfig', 'angular-toArrayFilter', 'ngCookies']);
 

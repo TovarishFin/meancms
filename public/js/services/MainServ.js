@@ -5,7 +5,8 @@ angular.module('MainAppServices',[])
 			products: [],
 			customers:[],
 			pMethods:[],
-			orders:[]
+			orders:[],
+			userInfo:[]
 		};
 			//api calls for products
 			call.getProducts = function(){
@@ -113,6 +114,12 @@ angular.module('MainAppServices',[])
 			};
 			call.getShippingLabel=function(order){
 				$window.open('https://api.postmaster.io/'+order.sLabel);
+			};
+			call.createUser=function(newUser){
+				return $http.post('/api/users', newUser)
+			};
+			call.getUserInfo = function(){
+				return $http.get('/api/userinfo')
 			};
 					
 		return call;

@@ -251,6 +251,37 @@ router.get('/logout',function(req,res){
 	res.redirect('/login');
 });
 
+router.post('/api/users',function(req,res){
+	newUser = new User(req.body);
+	newUser.save(function(err, user){
+		if(err){
+			console.log(err);
+		} else {
+			res.json(user)
+		};
+	});
+});
+
+router.get('/api/users', function(req,res){
+	User.find({}, function(err,users){
+		if(err){
+			console.log(err);
+		} else {
+			res.json(users)
+		};
+	})
+});
+
+router.get('/api/userinfo', function(req,res){
+	userInfo={};
+	userInfo.username=req.user.username;
+	userInfo.usertype=req.user.usertype;
+	userInfo.email=req.user.email;
+	userInfo._id=req.user._id;
+	res.json(userInfo);
+});
+
+
 //catch all other paths noot defined above...
 router.get('*', isLoggedIn.isLoggedIn, function(req, res, next) {
   res.render('index', { title: 'MEAN CMS' });

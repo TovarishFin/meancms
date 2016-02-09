@@ -1,6 +1,19 @@
 angular.module('MainAppController',[])
+	.controller('NavCtrl', ['$scope', 'apiCall',function($scope, apiCall){
+		$scope.usertype=null;
+		apiCall.getUserInfo()
+			.success(function(data){
+				$scope.usertype=data.usertype;
+			});
+		
+	}])
+	
 	.controller('HomeCtrl',['$scope', 'apiCall', function($scope, apiCall){
-		$scope.test='testorino diddly doo';
+		$scope.test ='testorino diddly doo';
+		apiCall.getUserInfo()
+			.success(function(data){
+				$scope.test2=data.usertype;
+				});
 	}])
 
 	.controller('ProdCtrl', ['$scope', 'apiCall', function($scope, apiCall){
@@ -254,5 +267,14 @@ angular.module('MainAppController',[])
 					$scope.result=data;
 				});
 			apiCall.getOrdersByStatus(3);
+		};
+	}])
+	.controller('RegisterCtrl', ['$scope', 'apiCall', function($scope, apiCall){
+		$scope.createUser=function(){
+			apiCall.createUser($scope.newUser)
+				.success(function(data){
+					$scope.result=data;
+				});
+			$scope.newUser=null;
 		};
 	}])

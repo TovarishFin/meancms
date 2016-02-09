@@ -1,0 +1,29 @@
+
+		<!-- ANGULAR DYNAMIC CONTENT -->
+<div ng-show="result" class="alert alert-warning" role="alert">{{result.username}} was created.</div>		
+<form name="register" ng-submit="createUser()">
+	<div class="form-group">
+		<label>Username</label>
+		<input type="text" name="username" class="form-control" ng-model="newUser.username"/>
+	</div>
+	<div class="form-group">
+		<label>Password</label>
+		<input type="password" name="password" class="form-control" ng-model="newUser.password"/>
+	</div>
+	<div class="form-group">
+		<label>Email</label>
+		<input type="text" name="email" class="form-control" ng-model="newUser.email"/>
+	</div>
+	<div class="form-group">
+		<label>User Type</label>
+		<select name="usertype" class="form-control" ng-model="newUser.usertype">
+			<option value="admin">admin</option>
+			<option value="cs">cs</option>
+			<option value="qa">qa</option>
+			<option value="ret">ret</option>
+			<option value="wh">wh</option>
+		</select>
+	</div>
+	<button type='submit' class='btn btn-success'>Create</button>
+</form>
+

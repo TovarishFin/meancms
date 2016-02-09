@@ -82,5 +82,10 @@ angular.module('MainAppConfig',['ui.router'])
 					}]
 				}
 			})
+			.state('register', {
+				url: '/register',
+				templateUrl: 'html/register.html',
+				controller: 'RegisterCtrl',
+			})
 			
 	}]);
